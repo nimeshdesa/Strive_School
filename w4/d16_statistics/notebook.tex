@@ -1,0 +1,1316 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Exercise\_01\_Cheers\_Stats\_Beers}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Content under Creative Commons Attribution license CC-BY 4.0, code under
+BSD 3-Clause License © 2017 L.A. Barba, N.C. Clementi,
+
+Modified and adapted by Jan Carbonell and Alessia Mondolo
+
+    \section{Cheers! Stats with Beers}\label{cheers-stats-with-beers}
+
+This first lesson explores how we can answer questions using data
+combined with practical methods from statistics.
+
+We'll need some fun data to work with. We found a neat data set of
+canned craft beers in the US, scraped from the web and cleaned up by
+Jean-Nicholas Hould
+({[}@NicholasHould{]}(https://twitter.com/NicholasHould?lang=en) on
+Twitter)---who we want to thank for having a permissive license on his
+GitHub repository so we can reuse his
+\href{https://github.com/nickhould/craft-beers-dataset}{work}!
+
+The data source ({[}@craftcans{]}(https://twitter.com/craftcans) on
+Twitter) doesn't say that the set includes \emph{all} the canned beers
+brewed in the country. So we have to asume that the data is a sample and
+may contain biases.
+
+We'll manipulate the data using \textbf{NumPy}---the array library for
+Python that we learned before in the batch. You will combine this with
+the knowledge you already have in \textbf{pandas}.
+
+\href{http://pandas.pydata.org/}{\texttt{pandas}} is an open-source
+library providing high-performance, easy-to-use data structures and
+data-analysis tools. Even though \texttt{pandas} is great for data
+analysis, we won't exploit all its power in this lesson. But we'll learn
+more about it later on!
+
+We'll use \texttt{pandas} to read the data file (in \texttt{csv} format,
+for comma-separated values), display it in a nice table, and extract the
+columns that we need---which we'll convert to \texttt{numpy} arrays to
+work with.
+
+Let's start by importing the two Python libraries that we need.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{import} \PY{n+nn}{pandas}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{numpy}
+\end{Verbatim}
+
+
+    \subsection{Step 1: Read the data file}\label{step-1-read-the-data-file}
+
+Below, we'll take a peek into the data file, \texttt{beers.csv,} using
+the system command \texttt{head} (which we can use with a bang, thanks
+to IPython).
+
+But first, we will download the data using a Python library for opening
+a URL on the Internet. We created a short URL for the data file in the
+public repository with our course materials.
+
+The cell below should download the data in your current working
+directory. The next cell shows you the first few lines of the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kn}{from} \PY{n+nn}{urllib}\PY{n+nn}{.}\PY{n+nn}{request} \PY{k}{import} \PY{n}{urlretrieve}
+         \PY{n}{URL} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://go.gwu.edu/engcomp2data1}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{urlretrieve}\PY{p}{(}\PY{n}{URL}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beers.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} ('beers.csv', <http.client.HTTPMessage at 0x21a78296f60>)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{o}{!}head \PY{l+s+s2}{\PYZdq{}beers.csv\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+'head' is not recognized as an internal or external command,
+operable program or batch file.
+
+    \end{Verbatim}
+
+    We can use \texttt{pandas} to read the data from the \texttt{csv} file,
+and save it into a new variable called \texttt{beers}. Let's then check
+the type of this new variable---rememeber that we can use the function
+\texttt{type()} to do this.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{beers} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{beers.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{beers}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} pandas.core.frame.DataFrame
+\end{Verbatim}
+            
+    This is a new data type for us: a \texttt{pandas\ DataFrame}. From the
+\texttt{pandas} documentation: "A \texttt{DataFrame} is a 2-dimensional
+labeled data structure with columns of potentially different types"
+{[}4{]}. You can think of it as the contens of a spreadsheet, saved into
+one handy Python variable. If you print it out, you get a nicely
+laid-out table:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{beers}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}       Unnamed: 0    abv   ibu    id                  name  \textbackslash{}
+         0              0  0.050   NaN  1436              Pub Beer   
+         1              1  0.066   NaN  2265           Devil's Cup   
+         2              2  0.071   NaN  2264   Rise of the Phoenix   
+         3              3  0.090   NaN  2263              Sinister   
+         4              4  0.075   NaN  2262         Sex and Candy   
+         {\ldots}          {\ldots}    {\ldots}   {\ldots}   {\ldots}                   {\ldots}   
+         2405        2405  0.067  45.0   928             Belgorado   
+         2406        2406  0.052   NaN   807         Rail Yard Ale   
+         2407        2407  0.055   NaN   620       B3K Black Lager   
+         2408        2408  0.055  40.0   145   Silverback Pale Ale   
+         2409        2409  0.052   NaN    84  Rail Yard Ale (2009)   
+         
+                                        style  brewery\_id  ounces  
+         0                American Pale Lager         408    12.0  
+         1            American Pale Ale (APA)         177    12.0  
+         2                       American IPA         177    12.0  
+         3     American Double / Imperial IPA         177    12.0  
+         4                       American IPA         177    12.0  
+         {\ldots}                              {\ldots}         {\ldots}     {\ldots}  
+         2405                     Belgian IPA         424    12.0  
+         2406        American Amber / Red Ale         424    12.0  
+         2407                     Schwarzbier         424    12.0  
+         2408         American Pale Ale (APA)         424    12.0  
+         2409        American Amber / Red Ale         424    12.0  
+         
+         [2410 rows x 8 columns]
+\end{Verbatim}
+            
+    Inspect the table above. The first column is a numbering scheme for the
+beers. The other columns contain the following data:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{abv}: Alcohol-by-volume of the beer.
+\item
+  \texttt{ibu}: International Bittering Units of the beer.
+\item
+  \texttt{id}: Unique identifier of the beer.
+\item
+  \texttt{name}: Name of the beer.
+\item
+  \texttt{style}: Style of the beer.
+\item
+  \texttt{brewery\_id}: Unique identifier of the brewery.
+\item
+  \texttt{ounces}: Ounces of beer in the can.
+\end{itemize}
+
+    \subsection{Step 2: Explore the data}\label{step-2-explore-the-data}
+
+In the field of statistics,
+\href{https://en.wikipedia.org/wiki/Exploratory_data_analysis}{Exploratory
+Data Analysis} (EDA) has the goal of summarizing the main features of
+our data, and seeing what the data can tell us without formal modeling
+or hypothesis-testing. {[}2{]}
+
+Let's start by extracting the columns with the \texttt{abv} and
+\texttt{ibu} values, and converting them to NumPy arrays. One of the
+advantages of data frames in \texttt{pandas} is that we can access a
+column simply using its header, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_frame[}\StringTok{'name_of_column'}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+The output of this action is a \texttt{pandas\ Series}. From the
+documentation: "a \texttt{Series} is a 1-dimensional labeled array
+capable of holding any data type." {[}4{]}
+
+\subsection{Exercise: Check the type of a column extracted by
+header:}\label{exercise-check-the-type-of-a-column-extracted-by-header}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{beers}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} Unnamed: 0      int64
+         abv           float64
+         ibu           float64
+         id              int64
+         name           object
+         style          object
+         brewery\_id      int64
+         ounces        float64
+         dtype: object
+\end{Verbatim}
+            
+    Of course, you can index and slice a data series like you know how to do
+with strings, lists and arrays.
+
+\subsection{\texorpdfstring{Exercise: Display the first ten elements of
+the \texttt{abv}
+series:}{Exercise: Display the first ten elements of the abv series:}}\label{exercise-display-the-first-ten-elements-of-the-abv-series}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{beers}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} 0    0.050
+         1    0.066
+         2    0.071
+         3    0.090
+         4    0.075
+         5    0.077
+         6    0.045
+         7    0.065
+         8    0.055
+         9    0.086
+         Name: abv, dtype: float64
+\end{Verbatim}
+            
+    Inspect the data in the table again: you'll notice that there are
+\texttt{NaN} (not-a-number) elements in both the \texttt{abv} and
+\texttt{ibu} columns. Those values mean that there was no data reported
+for that beer. A typical task when cleaning up data is to deal with
+these pesky \texttt{NaN}s.
+
+\subsection{\texorpdfstring{Exercise: Extract the two series
+corresponding to the \texttt{abv} and \texttt{ibu} columns, clean the
+data by removing all \texttt{NaN} values, and then access the values of
+each series and assign them to a NumPy
+array.}{Exercise: Extract the two series corresponding to the abv and ibu columns, clean the data by removing all NaN values, and then access the values of each series and assign them to a NumPy array.}}\label{exercise-extract-the-two-series-corresponding-to-the-abv-and-ibu-columns-clean-the-data-by-removing-all-nan-values-and-then-access-the-values-of-each-series-and-assign-them-to-a-numpy-array.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{abv\PYZus{}series} \PY{o}{=} \PY{n}{beers}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{ibu\PYZus{}series} \PY{o}{=} \PY{n}{beers}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \paragraph{Check out the length of
+abv}\label{check-out-the-length-of-abv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{abv\PYZus{}series}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} no of nan values.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} 62
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{abv\PYZus{}series}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} 2410
+\end{Verbatim}
+            
+    Another advantage of \texttt{pandas} is that it has the ability to
+handle missing data. The data-frame method \texttt{dropna()} returns a
+new data frame with only the good values of the original: all the null
+values are thrown out. This is super useful!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{abv\PYZus{}series}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \#\#\#\# Check out the length of the cleaned-up \texttt{abv} data;
+you'll see that it's shorter than the original. \texttt{NaN}s gone!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{abv\PYZus{}clean} \PY{o}{=}\PY{n}{abv\PYZus{}series}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{abv\PYZus{}clean}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} abv\PYZus{}series.count() \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} Other way to find the lenght \PYZgt{}\PYZgt{} returns the length excluding nan.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 2348
+\end{Verbatim}
+            
+    Remember that a a \texttt{pandas} \emph{Series} consists of a column of
+values, and their labels. You can extract the values via the
+\href{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.values.html}{\texttt{series.values}}
+attribute, which returns a \texttt{numpy.ndarray} (multidimensional
+array). In the case of the \texttt{abv\_clean} series, you get a
+one-dimensional array. We save it into the variable name \texttt{abv}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{abv} \PY{o}{=} \PY{n}{abv\PYZus{}clean}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{abv}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.05  0.066 0.071 {\ldots} 0.055 0.055 0.052]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{abv}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} numpy.ndarray
+\end{Verbatim}
+            
+    \subsection{\texorpdfstring{Exercise: Now, repeat the whole process for
+the \texttt{ibu}
+column:}{Exercise: Now, repeat the whole process for the ibu column:}}\label{exercise-now-repeat-the-whole-process-for-the-ibu-column}
+
+\paragraph{\texorpdfstring{extract the column into a series, clean it up
+removing \texttt{NaN}s, extract the series values as an array, check how
+many values we
+lost.}{extract the column into a series, clean it up removing NaNs, extract the series values as an array, check how many values we lost.}}\label{extract-the-column-into-a-series-clean-it-up-removing-nans-extract-the-series-values-as-an-array-check-how-many-values-we-lost.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{ibu\PYZus{}series}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} no of nan values.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} 1005
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{ibu\PYZus{}series}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ibu\PYZus{}clean} \PY{o}{=} \PY{n}{ibu\PYZus{}series}
+         \PY{n}{ibu} \PY{o}{=} \PY{n}{ibu\PYZus{}clean}\PY{o}{.}\PY{n}{values}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{ibu\PYZus{}clean}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} ibu\PYZus{}series.count() \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} Other way to find the lenght \PYZgt{}\PYZgt{} returns the length excluding nan.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} 1405
+\end{Verbatim}
+            
+    \subparagraph{Exercise}\label{exercise}
+
+Write a Python function that calculates the percentage of missing values
+for a certain data series. Use the function to calculate the percentage
+of missing values for the \texttt{abv} and \texttt{ibu} data sets.
+
+For the original series, before cleaning, remember that you can access
+the values with \texttt{series.values} (e.g.,
+\texttt{abv\_series.values}).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{def} \PY{n+nf}{prc\PYZus{}missing\PYZus{}value}\PY{p}{(}\PY{n}{series}\PY{p}{)}\PY{p}{:}
+             \PY{n}{percentage} \PY{o}{=} \PY{n}{series}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100}
+             \PY{k}{return} \PY{n}{percentage}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentage of missing value for abv = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{prc\PYZus{}missing\PYZus{}value}\PY{p}{(}\PY{n}{beers}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentage of missing value for ibu = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{prc\PYZus{}missing\PYZus{}value}\PY{p}{(}\PY{n}{beers}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Percentage of missing value for abv =  2.572614107883817
+Percentage of missing value for ibu =  41.70124481327801
+
+    \end{Verbatim}
+
+    \subparagraph{Important:}\label{important}
+
+Notice that in the case of the variable \texttt{ibu} we are missing
+almost 42\% of the values. This is important, because it will affect our
+analysis. When we do descriptive statistics, we will ignore these
+missing values, and having 42\% missing will very likely cause bias.
+
+    \subsection{Step 3: Ready, stats, go!}\label{step-3-ready-stats-go}
+
+Now that we have NumPy arrays with clean data, let's see how we can
+manipulate them to get some useful information.
+
+Focusing on the numerical variables \texttt{abv} and \texttt{ibu}, we'll
+walk through some "descriptive statistics," below. In other words, we
+aim to generate statistics that summarize the data concisely.
+
+    \subsubsection{Maximum and minimum}\label{maximum-and-minimum}
+
+The maximum and minimum values of a dataset are helpful as they tell us
+the \emph{range} of our sample: the range gives some indication of the
+\emph{variability} in the data. We can obtain them for our \texttt{abv}
+and \texttt{ibu} arrays with the \texttt{min()} and \texttt{max()}
+functions from NumPy.
+
+    \textbf{abv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{abv\PYZus{}min} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{abv}\PY{p}{)}
+         \PY{n}{abv\PYZus{}max} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{abv}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The minimum value for abv is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{abv\PYZus{}min}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The maximum value for abv is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{abv\PYZus{}max}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The minimum value for abv is:  0.001
+The maximum value for abv is:  0.128
+
+    \end{Verbatim}
+
+    \textbf{ibu}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{ibu\PYZus{}min} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{ibu}\PY{p}{)}
+         \PY{n}{ibu\PYZus{}max} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{ibu}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The minimum value for ibu is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ibu\PYZus{}min}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The maximum value for ibu is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ibu\PYZus{}max}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The minimum value for ibu is:  4.0
+The maximum value for ibu is:  138.0
+
+    \end{Verbatim}
+
+    \subsubsection{Mean value}\label{mean-value}
+
+The \textbf{mean} value is one of the main measures to describe the
+central tendency of the data: an indication of where's the "center" of
+the data. If we have a sample of \(N\) values, \(x_i\), the mean,
+\(\bar{x}\), is calculated by:
+
+\begin{equation*}
+    \bar{x} = \frac{1}{N}\sum_{i} x_i
+\end{equation*}
+
+In words, that is the sum of the data values divided by the number of
+values, \(N\).
+
+You've already learned how to write a function to compute the mean in
+\href{http://go.gwu.edu/engcomp1lesson5}{Module 1 Lesson 5}, but you
+also learned that NumPy has a built-in \texttt{mean()} function. We'll
+use this to get the mean of the \texttt{abv} and \texttt{ibu} values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{abv\PYZus{}mean} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{abv}\PY{p}{)}
+         \PY{n}{ibu\PYZus{}mean} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{ibu}\PY{p}{)}
+\end{Verbatim}
+
+
+    Next, we'll print these two variables, but we'll use some fancy new way
+of printing with Python's string formatter, \texttt{string.format()}.
+There's a sweet site dedicated to Python's string formatter, called
+\href{https://pyformat.info}{PyFormat}, where you can learn lots of
+tricks!
+
+The basic trick is to use curly brackets \texttt{\{\}} as placeholder
+for a variable value that you want to print in the middle of a string
+(say, a sentence that explains what you are printing), and to pass the
+variable name as argument to \texttt{.format()}, preceded by the string.
+
+Let's try something out\ldots{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The mean value for abv is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ and for ibu }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{abv\PYZus{}mean}\PY{p}{,} \PY{n}{ibu\PYZus{}mean}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The mean value for abv is 0.059773424190800686 and for ibu 42.71316725978647
+
+    \end{Verbatim}
+
+    Ugh! That doesn't look very good, does it? Here's where Python's string
+formatting gets fancy. We can print fewer decimal digits, so the
+sentence is more readable. For example, if we want to have four decimal
+digits, we specify it this way:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The mean value for abv is }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{ and for ibu }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{abv\PYZus{}mean}\PY{p}{,} \PY{n}{ibu\PYZus{}mean}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The mean value for abv is 0.0598 and for ibu 42.7132
+
+    \end{Verbatim}
+
+    Inside the curly brackets---the placeholders for the values we want to
+print---the \texttt{f} is for \texttt{float} and the \texttt{.4} is for
+four digits after the decimal dot. The colon here marks the beginning of
+the format specification (as there are options that can be passed
+before). There are so many tricks to Python's string formatter that
+you'll usually look up just what you need. Another useful resource for
+string formatting is the
+\href{https://mkaz.blog/code/python-string-format-cookbook/}{Python
+String Format Cookbook}. Check it out!
+
+    \subsubsection{Variance and standard
+deviation}\label{variance-and-standard-deviation}
+
+While the mean indicates where's the center of your data, the
+\textbf{variance} and \textbf{standard deviation} describe the
+\emph{spread} or variability of the data. We already mentioned that the
+\emph{range} (difference between largest and smallest data values) is
+also an indication of variability. But the standard deviation is the
+most common measure of variability.
+
+We really like the way
+\href{https://profiles.stanford.edu/kristin-sainani}{Prof. Kristin
+Sainani}, of Stanford University, presents this in her online course on
+\href{https://lagunita.stanford.edu/courses/Medicine/MedStats-SP/SelfPaced/about}{Statistics
+in Medicine}. In her lecture "Describing Quantitative Data: Whhat is the
+variability in the data?", available
+\href{https://youtu.be/hlFeEQF5tDc}{on YouTube}, she asks: \emph{What if
+someone were to ask you to devise a statistic that gives the avarage
+distance from the mean?} Think about this a little bit.
+
+The distance from the mean, for any data value, is \(x_i - \bar{x}\). So
+what is the average of the distances from the mean? If we try to simply
+compute the average of all the values \(x_i - \bar{x}\), some of which
+are negative, you'll just get zero! It doesn't work.
+
+Since the problem is the negative distances from the mean, you might
+suggest using absolute values. But this is just mathematically
+inconvenient. Another way to get rid of negative values is to take the
+squares. And that's how we get to the expression for the
+\emph{variance}: it is the average of the squares of the deviations from
+the mean. For a set of \(N\) values,
+
+\begin{equation*}
+     \text{var} = \frac{1}{N}\sum_{i} (x_i - \bar{x})^2
+\end{equation*}
+
+The variance itself is hard to interpret. The problem with it is that
+the units are strange (they are the square of the original units). The
+\textbf{standard deviation}, the square root of the variance, is more
+meaningful because it has the same units as the original variable.
+Often, the symbol \(\sigma\) is used for it:
+
+\begin{equation*} 
+    \sigma = \sqrt{\text{var}} = \sqrt{\frac{1}{N}\sum_{i} (x_i - \bar{x})^2}
+\end{equation*}
+
+    \subsubsection{Sample vs. population}\label{sample-vs.-population}
+
+The above definitions are used when \(N\) (the number of values)
+represents the entire population. But if we have a \emph{sample} of that
+population, the formulas have to be adjusted: instead of dividing by
+\(N\) we divide by \(N-1\). This is important, especially when we work
+with real data since usually we have samples of populations.
+
+The \textbf{standard deviation} of a sample is denoted by \(s\), and the
+formula is:
+
+\begin{equation*}     
+     s = \sqrt{\frac{1}{N-1}\sum_{i} (x_i - \bar{x})^2}
+\end{equation*}
+
+Why? This gets a little technical, but the reason is that if you have a
+\emph{sample} of the population, you don't know the \emph{real} value of
+the mean, and \(\bar{x}\) is actually an \emph{estimate} of the mean.
+That's why you'll often find the symbol \(\mu\) used to denote the
+population mean, and distinguish it with the sample mean, \(\bar{x}\).
+Using \(\bar{x}\) to compute the standard deviation introduces a small
+bias: \(\bar{x}\) is computed \emph{from the sample values}, and the
+data are on average (slightly) closer to \(\bar{x}\) than the population
+is to \(\mu\). Dividing by \(N-1\) instead of \(N\) corrects this bias!
+
+Prof. Sainani explains it by saying that we lost one degree of freedom
+when we estimated the mean using \(\bar{x}\). For example, say we have
+100 people and I give you their mean age, and the actual age for 99
+people from the sample: you'll be able to calculate the age of that
+100th person. Once we calculated the mean, we only have 99 degrees of
+freedom left because that 100th person's age is fixed.
+
+    \subsubsection{Let's code!}\label{lets-code}
+
+Now that we have the math sorted out, we can program functions to
+compute the variance and the standard deviation. In our case, we are
+working with samples of the population of craft beers, so we need to use
+the formulas with \(N-1\) in the denominator.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k}{def} \PY{n+nf}{sample\PYZus{}var}\PY{p}{(}\PY{n}{array}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Calculates the variance of an array that contains values of a sample of a }
+         \PY{l+s+sd}{    population. }
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    array : array, contains sample of values. }
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    var   : float, variance of the array .}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{c+c1}{\PYZsh{}     array = np.array(array)}
+             \PY{n}{mean} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{array}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{array}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}     deviation = []}
+         \PY{c+c1}{\PYZsh{}     for value in array:}
+         \PY{c+c1}{\PYZsh{}         deviation.append((value\PYZhy{}mean)**2)}
+             \PY{n}{deviation} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{value} \PY{o}{\PYZhy{}} \PY{n}{mean}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} \PY{k}{for} \PY{n}{value} \PY{o+ow}{in} \PY{n}{array}\PY{p}{]}
+             \PY{n}{var} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{deviation}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{array}\PY{o}{.}\PY{n}{size}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{var}
+             
+\end{Verbatim}
+
+
+    Notice that we used \texttt{numpy.mean()} in our function: do you think
+we can make this function even more Pythonic?
+
+\emph{Hint:} Yes!, we totally can.
+
+\subparagraph{Exercise:}\label{exercise}
+
+Re-write the function \texttt{sample\_var()} using \texttt{numpy.sum()}
+to replace the \texttt{for}-loop. Name the function
+\texttt{var\_pythonic}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{def} \PY{n+nf}{var\PYZus{}pythonic}\PY{p}{(}\PY{n}{array}\PY{p}{)}\PY{p}{:}
+         \PY{c+c1}{\PYZsh{}     array = np.array(array)}
+             \PY{n}{length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{array}\PY{p}{)}
+             \PY{n}{mean} \PY{o}{=} \PY{n}{array}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{length}
+             \PY{n}{var} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{array}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{length}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{var}
+\end{Verbatim}
+
+
+    We have the sample variance, so we take its square root to get the
+standard deviation. We can make it a function, even though it's just one
+line of Python, to make our code more readable:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k}{def} \PY{n+nf}{sample\PYZus{}std}\PY{p}{(}\PY{n}{array}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Computes the standard deviation of an array that contains values}
+         \PY{l+s+sd}{    of a sample of a population.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    array : array, contains sample of values. }
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    std   : float, standard deviation of the array.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{var\PYZus{}pythonic}\PY{p}{(}\PY{n}{array}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{std}
+\end{Verbatim}
+
+
+    Let's call our brand new functions and assign the output values to new
+variables:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{abv\PYZus{}std} \PY{o}{=} \PY{n}{sample\PYZus{}std}\PY{p}{(}\PY{n}{abv}\PY{p}{)}
+         \PY{n}{ibu\PYZus{}std} \PY{o}{=} \PY{n}{sample\PYZus{}std}\PY{p}{(}\PY{n}{ibu}\PY{p}{)}
+\end{Verbatim}
+
+
+    If we print these values using the string formatter, only printing 4
+decimal digits, we can display our descriptive statistics in a pleasant,
+human-readable way.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The standard deviation for abv is }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{ and for ibu }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{abv\PYZus{}std}\PY{p}{,} \PY{n}{ibu\PYZus{}std}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The standard deviation for abv is 0.9999 and for ibu 25.9255
+
+    \end{Verbatim}
+
+    These numbers tell us that the \texttt{abv} values are quite
+concentrated around the mean value, while the \texttt{ibu} values are
+quite spread out from their mean. How could we check these descriptions
+of the data? A good way of doing so is using graphics: various types of
+plots can tell us things about the data.
+
+We'll learn about \emph{histograms} in this lesson, and in the following
+lesson we'll explore \emph{box plots}.
+
+    \subsection{Step 4: Distribution plots}\label{step-4-distribution-plots}
+
+Every time that we work with data, visualizing it is very useful.
+Visualizations give us a better idea of how our data behaves. One way of
+visualizing data is with a frequency-distribution plot known as
+\textbf{histogram}: a graphical representation of how the data is
+distributed. To make a histogram, first we need to "bin" the range of
+values (divide the range into intervals) and then we count how many data
+values fall into each interval. The intervals are usually consecutive
+(not always), of equal size and non-overlapping.
+
+Thanks to Python and Matplotlib, making histograms is easy. We recommend
+that you always read the documentation, in this case about
+\href{https://matplotlib.org/devdocs/api/_as_gen/matplotlib.pyplot.hist.html}{histograms}.
+We'll show you here an example using the \texttt{hist()} function from
+\texttt{pyplot}, but this is just a starting point.
+
+Let's import the libraries that we need for plotting, as you learned in
+\href{http://go.gwu.edu/engcomp1lesson5}{Module 1 Lesson 5}, then study
+the plotting commands used below. Try changing some of the plot options
+and seeing the effect.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{c+c1}{\PYZsh{}Import rcParams to set font styles}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{rcParams}
+         
+         \PY{c+c1}{\PYZsh{}Set font style and size }
+         \PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.family}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{serif}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{16}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{}You can set the size of the figure by doing:}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Plotting}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{abv}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}3498db}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}The \PYZbs{}n is to leave a blank line between the title and the plot}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abv }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alcohol by Volume (abv) }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_65_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{}You can set the size of the figure by doing:}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Plotting}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{ibu}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}e67e22}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}The \PYZbs{}n is to leave a blanck line between the title and the plot}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibu }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{International Bittering Units (ibu)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subparagraph{Exploratory exercise:}\label{exploratory-exercise}
+
+Play around with the plots, change the values of the bins, colors, etc.
+
+    \subsubsection{Comparing with a normal
+distribution}\label{comparing-with-a-normal-distribution}
+
+A \textbf{normal} (or Gaussian) distribution is a special type of
+distrubution that behaves as shown in the figure: 68\% of the values are
+within one standard deviation \(\sigma\) from the mean; 95\% lie within
+\(2\sigma\); and at a distance of \(\pm3\sigma\) from the mean, we cover
+99.7\% of the values. This fact is known as the \(3\)-\(\sigma\) rule,
+or 68-95-99.7 (empirical) rule.
+
+ \#\#\#\# Standard deviation and coverage in a normal distribution.
+Modified figure based on original from
+\href{https://commons.wikimedia.org/wiki/File:Standard_deviation_diagram.svg}{Wikimedia
+Commons}, the free media repository.
+
+Notice that our histograms don't follow the shape of a normal
+distribution, known as \emph{Bell Curve}. Our histograms are not
+centered in the mean value, and they are not symetric with respect to
+it. They are what we call \textbf{skewed} to the right (yes, to the
+\emph{right}). A right (or positive) skewed distribution looks like it's
+been pushed to the left: the right tail is longer and most of the values
+are concentrated on the left of the figure. Imagine that "right-skewed"
+means that a force from the right pushes on the curve.
+
+    \subparagraph{Discuss with your pair programming
+partner}\label{discuss-with-your-pair-programming-partner}
+
+\begin{itemize}
+\item
+  How do you think that skewness will affect the percentages of coverage
+  by standard deviation compared to the Bell Curve?
+\item
+  Can we calculate those percentages?
+\end{itemize}
+
+\subparagraph{Spoiler alert! (and
+Exercise)}\label{spoiler-alert-and-exercise}
+
+Yes we can, and guess what: we can do it in a few lines of Python. But
+before doing that, we want you to explain in your own words how the
+following piece of code works.
+
+\emph{Hints:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Check what the logical operation
+  \texttt{numpy.logical\_and(1\textless{}x,\ x\textless{}4)} returns.
+\item
+  Check what happens if you sum booleans. For example,
+  \texttt{True\ +\ True}, \texttt{True\ +\ False} and so on.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{x} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+         \PY{n}{num\PYZus{}ele} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZlt{}}\PY{n}{x}\PY{p}{,} \PY{n}{x}\PY{o}{\PYZlt{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{num\PYZus{}ele}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+
+    \end{Verbatim}
+
+    Now, using the same idea, we will calculate the number of elements in
+each interval of width \((1\sigma, 2\sigma, 3\sigma)\), and get the
+corresponding percentage.
+
+Since we want to compute this for both of our variables, \texttt{abv}
+and \texttt{ibu}, we'll write a function to do so. Study carefully the
+code below. Better yet, explain it to your neighbor.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{k}{def} \PY{n+nf}{std\PYZus{}percentages}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{x\PYZus{}mean}\PY{p}{,} \PY{n}{x\PYZus{}std}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Computes the percentage of coverage at 1std, 2std and 3std from the}
+         \PY{l+s+sd}{    mean value of a certain variable x.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    x      : array, data we want to compute on. }
+         \PY{l+s+sd}{    x\PYZus{}mean : float, mean value of x array.}
+         \PY{l+s+sd}{    x\PYZus{}std  : float, standard deviation of x array.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    per\PYZus{}std\PYZus{}1 : float, percentage of values within 1 standard deviation.}
+         \PY{l+s+sd}{    per\PYZus{}std\PYZus{}2 : float, percentage of values within 2 standard deviations.}
+         \PY{l+s+sd}{    per\PYZus{}std\PYZus{}3 : float, percentage of values within 3 standard deviations.    }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{std\PYZus{}1} \PY{o}{=} \PY{n}{x\PYZus{}std}
+             \PY{n}{std\PYZus{}2} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{x\PYZus{}std}
+             \PY{n}{std\PYZus{}3} \PY{o}{=} \PY{l+m+mi}{3} \PY{o}{*} \PY{n}{x\PYZus{}std}
+             
+             \PY{n}{elem\PYZus{}std\PYZus{}1} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{p}{(}\PY{n}{x\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{std\PYZus{}1}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{x}\PY{p}{,} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{x\PYZus{}mean} \PY{o}{+} \PY{n}{std\PYZus{}1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{per\PYZus{}std\PYZus{}1} \PY{o}{=} \PY{n}{elem\PYZus{}std\PYZus{}1} \PY{o}{*} \PY{l+m+mi}{100} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} 
+             
+             \PY{n}{elem\PYZus{}std\PYZus{}2} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{p}{(}\PY{n}{x\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{std\PYZus{}2}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{x}\PY{p}{,} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{x\PYZus{}mean} \PY{o}{+} \PY{n}{std\PYZus{}2}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{per\PYZus{}std\PYZus{}2} \PY{o}{=} \PY{n}{elem\PYZus{}std\PYZus{}2} \PY{o}{*} \PY{l+m+mi}{100} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} 
+             
+             \PY{n}{elem\PYZus{}std\PYZus{}3} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{p}{(}\PY{n}{x\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{std\PYZus{}3}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{x}\PY{p}{,} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{x\PYZus{}mean} \PY{o}{+} \PY{n}{std\PYZus{}3}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{per\PYZus{}std\PYZus{}3} \PY{o}{=} \PY{n}{elem\PYZus{}std\PYZus{}3} \PY{o}{*} \PY{l+m+mi}{100} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} 
+             
+             \PY{k}{return} \PY{n}{per\PYZus{}std\PYZus{}1}\PY{p}{,} \PY{n}{per\PYZus{}std\PYZus{}2}\PY{p}{,} \PY{n}{per\PYZus{}std\PYZus{}3}
+             
+\end{Verbatim}
+
+
+    Let's compute the percentages next. Notice that the function above
+returns three values. If we want to assign each value to a different
+variable, we need to follow a specific syntax. In our example this would
+be:
+
+    \textbf{abv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{abv\PYZus{}std1\PYZus{}per}\PY{p}{,} \PY{n}{abv\PYZus{}std2\PYZus{}per}\PY{p}{,} \PY{n}{abv\PYZus{}std3\PYZus{}per} \PY{o}{=} \PY{n}{std\PYZus{}percentages}\PY{p}{(}\PY{n}{abv}\PY{p}{,} \PY{n}{abv\PYZus{}mean}\PY{p}{,} \PY{n}{abv\PYZus{}std}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's pretty-print the values of our variables so we can inspect them:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The percentage of coverage at 1 std of the abv\PYZus{}mean is : }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{abv\PYZus{}std1\PYZus{}per}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The percentage of coverage at 2 std of the abv\PYZus{}mean is : }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{abv\PYZus{}std2\PYZus{}per}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The percentage of coverage at 3 std of the abv\PYZus{}mean is : }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{abv\PYZus{}std3\PYZus{}per}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The percentage of coverage at 1 std of the abv\_mean is : 100.00 \%
+The percentage of coverage at 2 std of the abv\_mean is : 100.00 \%
+The percentage of coverage at 3 std of the abv\_mean is : 100.00 \%
+
+    \end{Verbatim}
+
+    \textbf{ibu}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{ibu\PYZus{}std1\PYZus{}per}\PY{p}{,} \PY{n}{ibu\PYZus{}std2\PYZus{}per}\PY{p}{,} \PY{n}{ibu\PYZus{}std3\PYZus{}per} \PY{o}{=} \PY{n}{std\PYZus{}percentages}\PY{p}{(}\PY{n}{ibu}\PY{p}{,} \PY{n}{ibu\PYZus{}mean}\PY{p}{,} \PY{n}{ibu\PYZus{}std}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The percentage of coverage at 1 std of the ibu\PYZus{}mean is : }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ibu\PYZus{}std1\PYZus{}per}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The percentage of coverage at 2 std of the ibu\PYZus{}mean is : }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ibu\PYZus{}std2\PYZus{}per}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The percentage of coverage at 3 std of the ibu\PYZus{}mean is : }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ibu\PYZus{}std3\PYZus{}per}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The percentage of coverage at 1 std of the ibu\_mean is : 68.11 \%
+The percentage of coverage at 2 std of the ibu\_mean is : 95.66 \%
+The percentage of coverage at 3 std of the ibu\_mean is : 99.72 \%
+
+    \end{Verbatim}
+
+    Notice that in both cases the percentages are not that far from the
+values for normal distribution (68\%, 95\%, 99.7\%), especially for
+\(2\sigma\) and \(3\sigma\). So usually you can use these values as a
+rule of thumb.
+
+    \subsection{What we've learned}\label{what-weve-learned}
+
+\begin{itemize}
+\tightlist
+\item
+  Read data from a \texttt{csv} file using \texttt{pandas}.
+\item
+  The concepts of Data Frame and Series in \texttt{pandas}.
+\item
+  Clean null (NaN) values from a Series using \texttt{pandas}.
+\item
+  Convert a \texttt{panda}s Series into a \texttt{numpy} array.
+\item
+  Compute maximum and minimum, and range.
+\item
+  Revise concept of mean value.
+\item
+  Compute the variance and standard deviation.
+\item
+  Use the mean and standard deviation to understand how the data is
+  distributed.
+\item
+  Plot frequency distribution diagrams (histograms).
+\item
+  Normal distribution and 3-sigma rule.
+\end{itemize}
+
+    \subsection{References}\label{references}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://github.com/nickhould/craft-beers-dataset}{Craft beer
+  datatset} by Jean-Nicholas Hould.
+\item
+  \href{https://en.wikipedia.org/wiki/Exploratory_data_analysis}{Exploratory
+  Data Analysis}, Wikipedia article.
+\item
+  \emph{Think Python: How to Think Like a Computer Scientist} (2012).
+  Allen Downey. Green Tea Press.
+  \href{http://greenteapress.com/thinkpython/thinkpython.pdf}{PDF
+  available}
+\item
+  \href{https://pandas.pydata.org/pandas-docs/stable/dsintro.html}{Intro
+  to data Structures}, \texttt{pandas} documentation.
+\item
+  \emph{Think Stats: Probability and Statistics for Programmers} version
+  1.6.0 (2011). Allen Downey. Green Tea Press.
+  \href{http://greenteapress.com/thinkstats/thinkstats.pdf}{PDF
+  available}
+\end{enumerate}
+
+\subsubsection{Recommended viewing}\label{recommended-viewing}
+
+From
+\href{https://lagunita.stanford.edu/courses/Medicine/MedStats-SP/SelfPaced/about}{"Statistics
+in Medicine,"}, a free course in Stanford Online by Prof. Kristin
+Sainani, we highly recommend that you watch these three lectures: *
+\href{https://youtu.be/tQ5slNYRcC4}{Describing Quantitative Data: Where
+is the center?} * \href{https://youtu.be/hlFeEQF5tDc}{Describing
+Quantitative Data: What is the variability in the data?} *
+\href{https://youtu.be/qeG0uNI3DBQ}{Variability in the data, continued:
+examples, bell curve}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{} Execute this cell to load the notebook\PYZsq{}s style sheet, then ignore it}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+         \PY{n}{css\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{style/custom.css}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{HTML}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{n}{css\PYZus{}file}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
