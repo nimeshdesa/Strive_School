@@ -17,3 +17,5 @@
 * Day 12: Calculus
 * Day 13: Precalculus
 * Day 14: Probability, Permutaion, and Combination
+## Week:5
+* Day 19: Statistics/P-Value
